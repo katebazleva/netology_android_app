@@ -1,0 +1,2 @@
+rootProject.name='SkyNetwork'
+include ':app'
