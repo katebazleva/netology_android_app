@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val createdTime = Calendar.getInstance()
-        createdTime.set(2020, 7, 20, 10, 35, 0)
+        createdTime.set(2020, 6, 20, 10, 35, 0)
 
         val post = Post(
             1,
@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
             sharedByMe = true
         )
 
-        dateTv.text = SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault()).format(post.created)
+        dateTv.text = getPostedAgoHumanReadable((System.currentTimeMillis() - createdTime.timeInMillis)/1000)
 
         authorTv.text = post.author
 
