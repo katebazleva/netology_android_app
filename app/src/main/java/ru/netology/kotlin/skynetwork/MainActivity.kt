@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val createdTime = Calendar.getInstance()
-        createdTime.set(2020, 6, 20, 10, 35, 0)
+        createdTime.set(2020, Calendar.JULY, 20, 9, 35, 0)
 
         val post = Post(
             1,
