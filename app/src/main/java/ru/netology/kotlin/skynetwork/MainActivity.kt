@@ -3,7 +3,6 @@ package ru.netology.kotlin.skynetwork
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import java.text.SimpleDateFormat
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -20,8 +19,9 @@ class MainActivity : AppCompatActivity() {
             "kate bazleva",
             "Something very interesting",
             createdTime.time,
-            likesCount = 10,
+            likesCount = 1,
             shareCount = 2,
+            likedByMe = true,
             sharedByMe = true
         )
 
@@ -49,6 +49,20 @@ class MainActivity : AppCompatActivity() {
         if (post.sharedByMe) {
             shareBtn.setImageResource(R.drawable.ic_share_active_24dp)
             shareCountTv.setTextColor(resources.getColor(R.color.green))
+        }
+
+        likeBtn.setOnClickListener {
+            post.likedByMe = !post.likedByMe
+            if (post.likedByMe) post.likesCount += 1 else post.likesCount -= 1
+            likeCountTv.text = if (post.likesCount >  0) post.likesCount.toString() else null
+
+            if (post.likedByMe) {
+                likeBtn.setImageResource(R.drawable.ic_favorite_active_24dp)
+                likeCountTv.setTextColor(resources.getColor(R.color.red))
+            } else {
+                likeBtn.setImageResource(R.drawable.ic_favorite_inactive_24dp)
+                likeCountTv.setTextColor(resources.getColor(R.color.gray))
+            }
         }
     }
 }
