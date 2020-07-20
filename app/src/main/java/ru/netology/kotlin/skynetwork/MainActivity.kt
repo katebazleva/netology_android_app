@@ -3,6 +3,7 @@ package ru.netology.kotlin.skynetwork
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import java.text.SimpleDateFormat
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -11,17 +12,22 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val createdTime = Calendar.getInstance()
+        createdTime.set(2020, 7, 20, 10, 35, 0)
+
         val post = Post(
             1,
             "kate bazleva",
             "Something very interesting",
-            Date(20, 7, 2020),
+            createdTime.time,
             likesCount = 10,
             shareCount = 2,
             sharedByMe = true
         )
 
-        dateTv.text = post.created.toString()
+        dateTv.text = SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault()).format(post.created)
+
+        authorTv.text = post.author
 
         contentTV.text = post.content
         contentTV.setTextColor(resources.getColor(R.color.black))
