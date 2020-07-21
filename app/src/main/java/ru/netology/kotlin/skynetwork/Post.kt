@@ -2,7 +2,7 @@ package ru.netology.kotlin.skynetwork
 
 import java.util.*
 
-class Post(
+open class Post(
     val id: Int,
     val author: String,
     val content: String,

@@ -60,11 +60,24 @@
             android:textSize="18sp"
             tools:text="Some content"/>
 
+        <TextView
+            android:id="@+id/locationTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:drawableStart="@drawable/ic_location"
+            android:ellipsize="start"
+            android:textColor="@color/lightBlue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/contentTV"
+            tools:text="1st street 10A"
+            android:visibility="gone"/>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/contentTV"
+            app:layout_constraintTop_toBottomOf="@id/locationTv"
             android:layout_marginTop="8dp">
 
             <ImageButton
