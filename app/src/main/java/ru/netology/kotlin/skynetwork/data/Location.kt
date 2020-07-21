@@ -1,4 +1,4 @@
-package ru.netology.kotlin.skynetwork
+package ru.netology.kotlin.skynetwork.data
 
 class Location(var lat: Double, var lng: Double)
 

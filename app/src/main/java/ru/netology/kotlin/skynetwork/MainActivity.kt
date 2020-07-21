@@ -6,6 +6,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import ru.netology.kotlin.skynetwork.data.Event
+import ru.netology.kotlin.skynetwork.data.Post
+import ru.netology.kotlin.skynetwork.data.Video
+import ru.netology.kotlin.skynetwork.data.VideoPost
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -17,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         val createdTime = Calendar.getInstance()
         createdTime.set(2020, Calendar.JULY, 20, 9, 35, 0)
 
-        val post = Event(
+        val post: Post = VideoPost(
             1,
             "kate bazleva",
             "Something very interesting",
@@ -26,8 +30,7 @@ class MainActivity : AppCompatActivity() {
             shareCount = 2,
             likedByMe = true,
             sharedByMe = true,
-            address = "Red square",
-            location = 55.752825 x 37.62316
+            video = Video("https://www.youtube.com/watch?v=WhWc3b3KhnY")
         )
 
         dateTv.text = getPostedAgoHumanReadable((System.currentTimeMillis() - createdTime.timeInMillis)/1000)
@@ -37,12 +40,21 @@ class MainActivity : AppCompatActivity() {
         contentTV.text = post.content
         contentTV.setTextColor(resources.getColor(R.color.black))
 
+        if (post is VideoPost) {
+            videoIv.visibility = View.VISIBLE
+
+            videoIv.setOnClickListener {
+                startActivity(Intent().apply {
+                    action = Intent.ACTION_VIEW
+                    data = Uri.parse(post.video.url)
+                })
+            }
+        }
+
         if (post is Event) {
             locationTv.visibility = View.VISIBLE
             locationTv.text = post.address
-        }
 
-        if (locationTv.visibility == View.VISIBLE) {
             locationTv.setOnClickListener {
                 val intent = Intent().apply {
                     action = Intent.ACTION_VIEW

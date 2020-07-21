@@ -1,4 +1,4 @@
-package ru.netology.kotlin.skynetwork
+package ru.netology.kotlin.skynetwork.data
 
 import java.util.*
 

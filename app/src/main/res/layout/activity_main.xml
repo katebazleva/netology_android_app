@@ -60,6 +60,18 @@
             android:textSize="18sp"
             tools:text="Some content"/>
 
+        <ImageView
+            android:id="@+id/videoIv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_play_circle_outline"
+            android:background="@color/lightBlue"
+            app:layout_constraintTop_toBottomOf="@id/contentTV"
+            android:paddingTop="24dp"
+            android:paddingBottom="24dp"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"/>
+
         <TextView
             android:id="@+id/locationTv"
             android:layout_width="wrap_content"
@@ -69,11 +81,12 @@
             android:ellipsize="start"
             android:textColor="@color/lightBlue"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/contentTV"
+            app:layout_constraintTop_toBottomOf="@id/videoIv"
             tools:text="1st street 10A"
             android:visibility="gone"/>
 
         <LinearLayout
+            android:id="@+id/socialButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
