@@ -1,8 +1,8 @@
-package ru.netology.kotlin.skynetwork
+package ru.netology.kotlin.skynetwork.data
 
 import java.util.*
 
-class Post(
+data class VideoPost(
     val id: Int,
     val author: String,
     val content: String,
@@ -12,6 +12,7 @@ class Post(
     var shareCount: Int = 0,
     var likedByMe: Boolean = false,
     var commentedByMe: Boolean = false,
-    var sharedByMe: Boolean = false
-) {
-}
+    var sharedByMe: Boolean = false,
+    val video: Video,
+    val postType: PostType = PostType.VIDEO_POST
+) : PostInterface
