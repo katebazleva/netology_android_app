@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/avatarIv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_android"
+            tools:srcCompat="@drawable/ic_android" />
+
+        <TextView
+            android:id="@+id/dateTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8sp"
+            android:textSize="10sp"
+            app:layout_constraintStart_toEndOf="@id/avatarIv"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="12 august 2020" />
+
+        <TextView
+            android:id="@+id/authorTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8sp"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@id/avatarIv"
+            app:layout_constraintTop_toBottomOf="@id/dateTv"
+            tools:text="Kate" />
+
+        <TextView
+            android:id="@+id/contentTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/avatarIv"
+            tools:text="Some content" />
+
+        <ImageView
+            android:id="@+id/videoIv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@color/lightBlue"
+            android:paddingTop="24dp"
+            android:paddingBottom="24dp"
+            android:src="@drawable/ic_play_circle_outline"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/contentTV" />
+
+        <TextView
+            android:id="@+id/locationTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:drawableStart="@drawable/ic_location"
+            android:ellipsize="start"
+            android:textColor="@color/lightBlue"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/videoIv"
+            tools:text="1st street 10A" />
+
+        <TextView
+            android:id="@+id/likeCountTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:drawableStart="@drawable/ic_favorite_inactive_24dp"
+            android:drawablePadding="4dp"
+            app:layout_constraintEnd_toStartOf="@id/commentsCountTv"
+            app:layout_constraintTop_toBottomOf="@id/locationTv"
+            tools:text="10" />
+
+        <TextView
+            android:id="@+id/commentsCountTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:drawableStart="@drawable/ic_comment_inactive_24dp"
+            android:drawablePadding="4dp"
+            app:layout_constraintEnd_toStartOf="@id/shareCountTv"
+            app:layout_constraintTop_toBottomOf="@id/locationTv"
+            tools:text="1" />
+
+        <TextView
+            android:id="@+id/shareCountTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:drawableStart="@drawable/ic_share_inactive_24dp"
+            android:drawablePadding="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/locationTv"
+            tools:text="2" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

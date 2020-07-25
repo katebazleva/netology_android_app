@@ -1,19 +1,16 @@
 package ru.netology.kotlin.skynetwork
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
-import ru.netology.kotlin.skynetwork.data.EventPost
-import ru.netology.kotlin.skynetwork.data.PostType
-import ru.netology.kotlin.skynetwork.data.Video
-import ru.netology.kotlin.skynetwork.data.VideoPost
+import ru.netology.kotlin.skynetwork.adapter.PostAdapter
+import ru.netology.kotlin.skynetwork.data.SimplePost
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var postsAdapter: PostAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,103 +19,70 @@ class MainActivity : AppCompatActivity() {
         val createdTime = Calendar.getInstance()
         createdTime.set(2020, Calendar.JULY, 20, 9, 35, 0)
 
-        val post = VideoPost(
-            1,
-            "kate bazleva",
-            "Something very interesting",
-            createdTime.time,
-            likesCount = 1,
-            shareCount = 2,
-            likedByMe = true,
-            sharedByMe = true,
-            video = Video("https://www.youtube.com/watch?v=WhWc3b3KhnY")
+        val postsList = listOf(
+            SimplePost(
+                1,
+                "kate bazleva",
+                "Something very interesting",
+                createdTime.time,
+                likesCount = 1,
+                shareCount = 2,
+                likedByMe = true,
+                sharedByMe = true
+            ),
+            SimplePost(
+                2,
+                "bzzzz",
+                "Bzz-zzzz",
+                createdTime.time,
+                likesCount = 10
+            ),
+            SimplePost(
+                3,
+                "mikki",
+                "Third post!",
+                createdTime.time,
+                commentsCount = 3,
+                shareCount = 2,
+                commentedByMe = true
+            ),
+            SimplePost(
+                4,
+                "mouse",
+                "QWERTYUIOP[ASDFGHJKL;zxcvbnm,dhfkjehrfvcljbdnvcli ubaeowhlvbkjfzds;oifeh;oigbvavubeb;vb zjk",
+                createdTime.time,
+                likesCount = 5,
+                shareCount = 2,
+                likedByMe = true
+            ),
+            SimplePost(
+                5,
+                "mur",
+                "meow :3",
+                createdTime.time,
+                likesCount = 100,
+                commentsCount = 3,
+                shareCount = 2,
+                likedByMe = true,
+                sharedByMe = true
+            )
         )
 
-        dateTv.text = getPostedAgoHumanReadable((System.currentTimeMillis() - createdTime.timeInMillis)/1000)
+        initRecyclerView()
+        addData(postsList)
 
-        authorTv.text = post.author
+    }
 
-        contentTV.text = post.content
-        contentTV.setTextColor(ContextCompat.getColor(this, R.color.black))
+    private fun addData(postsList: List<SimplePost>) {
+        postsAdapter.submitPosts(postsList)
+    }
 
-        if (post.postType == PostType.VIDEO_POST) {
-            videoIv.visibility = View.VISIBLE
-
-            videoIv.setOnClickListener {
-                startActivity(Intent().apply {
-                    action = Intent.ACTION_VIEW
-                    data = Uri.parse((post as VideoPost).video.url)
-                })
-            }
-        } else if (post.postType == PostType.EVENT_POST) {
-            locationTv.visibility = View.VISIBLE
-            locationTv.text = (post as EventPost).address
-
-            locationTv.setOnClickListener {
-                val intent = Intent().apply {
-                    action = Intent.ACTION_VIEW
-                    data = Uri.parse("geo:${post.location.lat},${post.location.lng}")
-                }
-                startActivity(intent)
-            }
-        }
-
-        likeCountTv.text = if (post.likesCount >  0) post.likesCount.toString() else null
-        commentsCountTv.text = if (post.commentsCount >  0) post.commentsCount.toString() else null
-        shareCountTv.text = if (post.shareCount >  0) post.shareCount.toString() else null
-
-        if (post.likedByMe) {
-            likeCountTv.setCompoundDrawablesWithIntrinsicBounds(
-                R.drawable.ic_favorite_active_24dp,
-                0,
-                0,
-                0
-            )
-            likeCountTv.setTextColor(ContextCompat.getColor(this, R.color.red))
-        }
-
-        if (post.commentedByMe) {
-            commentsCountTv.setCompoundDrawablesWithIntrinsicBounds(
-                R.drawable.ic_comment_active_24dp,
-                0,
-                0,
-                0
-            )
-            commentsCountTv.setTextColor(ContextCompat.getColor(this, R.color.blue))
-        }
-
-        if (post.sharedByMe) {
-            shareCountTv.setCompoundDrawablesWithIntrinsicBounds(
-                R.drawable.ic_share_active_24dp,
-                0,
-                0,
-                0
-            )
-            shareCountTv.setTextColor(ContextCompat.getColor(this, R.color.green))
-        }
-
-        likeCountTv.setOnClickListener {
-            post.likedByMe = !post.likedByMe
-            if (post.likedByMe) post.likesCount += 1 else post.likesCount -= 1
-            likeCountTv.text = if (post.likesCount >  0) post.likesCount.toString() else null
-
-            if (post.likedByMe) {
-                likeCountTv.setCompoundDrawablesWithIntrinsicBounds(
-                    R.drawable.ic_favorite_active_24dp,
-                    0,
-                    0,
-                    0
-                )
-                likeCountTv.setTextColor(ContextCompat.getColor(this, R.color.red))
-            } else {
-                likeCountTv.setCompoundDrawablesWithIntrinsicBounds(
-                    R.drawable.ic_favorite_inactive_24dp,
-                    0,
-                    0,
-                    0
-                )
-                likeCountTv.setTextColor(ContextCompat.getColor(this, R.color.gray))
-            }
+    private fun initRecyclerView() {
+        recycler_view.apply {
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            addItemDecoration(ItemDecoration(45))
+            postsAdapter = PostAdapter()
+            adapter = postsAdapter
         }
     }
 }
