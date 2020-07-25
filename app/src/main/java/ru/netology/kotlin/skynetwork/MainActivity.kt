@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.netology.kotlin.skynetwork.data.Event
 import ru.netology.kotlin.skynetwork.data.Post
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         authorTv.text = post.author
 
         contentTV.text = post.content
-        contentTV.setTextColor(resources.getColor(R.color.black))
+        contentTV.setTextColor(ContextCompat.getColor(this, R.color.black))
 
         if (post is VideoPost) {
             videoIv.visibility = View.VISIBLE
@@ -69,18 +70,33 @@ class MainActivity : AppCompatActivity() {
         shareCountTv.text = if (post.shareCount >  0) post.shareCount.toString() else null
 
         if (post.likedByMe) {
-            likeBtn.setImageResource(R.drawable.ic_favorite_active_24dp)
-            likeCountTv.setTextColor(resources.getColor(R.color.red))
+            likeCountTv.setCompoundDrawablesWithIntrinsicBounds(
+                R.drawable.ic_favorite_active_24dp,
+                0,
+                0,
+                0
+            )
+            likeCountTv.setTextColor(ContextCompat.getColor(this, R.color.red))
         }
 
         if (post.commentedByMe) {
-            commentsBtn.setImageResource(R.drawable.ic_comment_active_24dp)
-            commentsCountTv.setTextColor(resources.getColor(R.color.blue))
+            commentsCountTv.setCompoundDrawablesWithIntrinsicBounds(
+                R.drawable.ic_comment_active_24dp,
+                0,
+                0,
+                0
+            )
+            commentsCountTv.setTextColor(ContextCompat.getColor(this, R.color.blue))
         }
 
         if (post.sharedByMe) {
-            shareBtn.setImageResource(R.drawable.ic_share_active_24dp)
-            shareCountTv.setTextColor(resources.getColor(R.color.green))
+            shareCountTv.setCompoundDrawablesWithIntrinsicBounds(
+                R.drawable.ic_share_active_24dp,
+                0,
+                0,
+                0
+            )
+            shareCountTv.setTextColor(ContextCompat.getColor(this, R.color.green))
         }
 
         likeBtn.setOnClickListener {
