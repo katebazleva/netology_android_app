@@ -2,7 +2,7 @@ package ru.netology.kotlin.skynetwork.data
 
 import java.util.*
 
-open class Post(
+data class EventPost(
     val id: Int,
     val author: String,
     val content: String,
@@ -12,6 +12,8 @@ open class Post(
     var shareCount: Int = 0,
     var likedByMe: Boolean = false,
     var commentedByMe: Boolean = false,
-    var sharedByMe: Boolean = false
-) {
-}
+    var sharedByMe: Boolean = false,
+    var address: String,
+    var location: Location,
+    val postType: PostType = PostType.EVENT_POST
+) : PostInterface

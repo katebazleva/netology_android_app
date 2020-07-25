@@ -48,7 +48,6 @@
             app:layout_constraintTop_toBottomOf="@id/dateTv"
             app:layout_constraintStart_toEndOf="@id/avatarIv"/>
 
-
         <TextView
             android:id="@+id/contentTV"
             android:layout_width="match_parent"
@@ -60,17 +59,6 @@
             android:textSize="18sp"
             tools:text="Some content"/>
 
-        <TextView
-            android:id="@+id/likeCountTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/contentTV"
-            android:drawableStart="@drawable/ic_favorite_inactive_24dp"
-            app:layout_constraintEnd_toStartOf="@id/commentsCountTv"
-            android:drawablePadding="4dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginTop="16dp"
-            tools:text="10"/>
         <ImageView
             android:id="@+id/videoIv"
             android:layout_width="match_parent"
@@ -96,33 +84,23 @@
             tools:text="1st street 10A"
             android:visibility="gone"/>
 
-        <LinearLayout
-            android:id="@+id/socialButton"
+        <TextView
+            android:id="@+id/likeCountTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:drawableStart="@drawable/ic_favorite_inactive_24dp"
+            android:drawablePadding="4dp"
+            app:layout_constraintEnd_toStartOf="@id/commentsCountTv"
             app:layout_constraintTop_toBottomOf="@id/locationTv"
-            android:layout_marginTop="8dp">
-
-            <ImageButton
-                android:id="@+id/likeBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_favorite_inactive_24dp"
-                android:background="@android:color/transparent"/>
-
-            <TextView
-                android:id="@+id/likeCountTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                tools:text="10"/>
+            tools:text="10" />
 
         <TextView
             android:id="@+id/commentsCountTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/contentTV"
+            app:layout_constraintTop_toBottomOf="@id/locationTv"
             android:drawableStart="@drawable/ic_comment_inactive_24dp"
             app:layout_constraintEnd_toStartOf="@id/shareCountTv"
             android:drawablePadding="4dp"
@@ -134,7 +112,7 @@
             android:id="@+id/shareCountTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/contentTV"
+            app:layout_constraintTop_toBottomOf="@id/locationTv"
             app:layout_constraintEnd_toEndOf="parent"
             android:drawableStart="@drawable/ic_share_inactive_24dp"
             android:drawablePadding="4dp"
