@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         val createdTime = Calendar.getInstance()
         createdTime.set(2020, Calendar.JULY, 20, 9, 35, 0)
 
-        val postsList = listOf(
+        val postsList = mutableListOf(
             Post(
                 1,
                 "kate bazleva",
@@ -75,6 +75,23 @@ class MainActivity : AppCompatActivity() {
                     "https://netology.ru/programs/kotlindevelopment/"
                 ),
                 postType = PostType.ADVERTISING
+            )
+        )
+
+        createdTime.set(2020, Calendar.JULY, 31, 15, 1, 0)
+        postsList.add(
+            Post(
+                6,
+                "mur-mur-mur",
+                "meow!!!",
+                createdTime.time,
+                likesCount = 2,
+                commentsCount = 0,
+                shareCount = 0,
+                likedByMe = true,
+                sharedByMe = true,
+                source = postsList[4],
+                postType = PostType.REPOST
             )
         )
 

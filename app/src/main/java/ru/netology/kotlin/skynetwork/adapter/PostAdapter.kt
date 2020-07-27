@@ -40,6 +40,13 @@ class PostAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     false
                 )
             )
+            ViewType.REPOST -> RepostViewHolder(
+                LayoutInflater.from(parent.context).inflate(
+                    R.layout.repost_card,
+                    parent,
+                    false
+                )
+            )
             else -> throw Exception("ViewHolder with type $viewType not exist")
         }
 
@@ -51,6 +58,7 @@ class PostAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             is EventPostViewHolder -> holder.bind(items[position])
             is VideoPostViewHolder -> holder.bind(items[position])
             is AdsPostViewHolder -> holder.bind(items[position])
+            is RepostViewHolder -> holder.bind(items[position])
         }
     }
 
@@ -58,6 +66,7 @@ class PostAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         PostType.VIDEO_POST -> ViewType.VIDEO_POST
         PostType.EVENT_POST -> ViewType.EVENT_POST
         PostType.ADVERTISING -> ViewType.ADVERTISING_POST
+        PostType.REPOST -> ViewType.REPOST
         else -> ViewType.SIMPLE_POST
     }
 
@@ -70,5 +79,6 @@ class PostAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         const val EVENT_POST = 1
         const val VIDEO_POST = 2
         const val ADVERTISING_POST = 3
+        const val REPOST = 4
     }
 }

@@ -11,7 +11,7 @@
         android:padding="16dp">
 
         <ImageView
-            android:id="@+id/avatarIv"
+            android:id="@+id/postAvatarIv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
@@ -20,28 +20,28 @@
             tools:srcCompat="@drawable/ic_android" />
 
         <TextView
-            android:id="@+id/dateTv"
+            android:id="@+id/postDateTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8sp"
             android:textSize="10sp"
-            app:layout_constraintStart_toEndOf="@id/avatarIv"
+            app:layout_constraintStart_toEndOf="@id/postAvatarIv"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="12 august 2020" />
 
         <TextView
-            android:id="@+id/authorTv"
+            android:id="@+id/postAuthorTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8sp"
             android:layout_marginTop="8dp"
             android:textColor="@color/black"
-            app:layout_constraintStart_toEndOf="@id/avatarIv"
-            app:layout_constraintTop_toBottomOf="@id/dateTv"
+            app:layout_constraintStart_toEndOf="@id/postAvatarIv"
+            app:layout_constraintTop_toBottomOf="@id/postDateTv"
             tools:text="Kate" />
 
         <ImageView
-            android:id="@+id/closeBtn"
+            android:id="@+id/postCloseBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_close"
@@ -49,88 +49,69 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/adsTv"
+            android:id="@+id/postAdsTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="8dp"
-            android:textSize="10sp"
-            app:layout_constraintTop_toBottomOf="@id/closeBtn"
             android:text="Рекламный пост"
-            tools:text="Рекламный пост"
-            android:visibility="gone"/>
+            android:textSize="10sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/postCloseBtn"
+            tools:text="Рекламный пост" />
 
         <TextView
-            android:id="@+id/contentTV"
+            android:id="@+id/postContentTV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:textSize="18sp"
             android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/avatarIv"
+            app:layout_constraintTop_toBottomOf="@id/postAuthorTv"
             tools:text="Some content" />
 
-        <ImageView
-            android:id="@+id/videoIv"
+        <include
+            layout="@layout/post_card"
+            android:id="@+id/sourceCard"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@color/lightBlue"
-            android:scaleType="centerCrop"
-            android:paddingTop="24dp"
-            android:paddingBottom="24dp"
-            android:src="@drawable/ic_play_circle_outline"
-            android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@id/contentTV" />
-
-        <TextView
-            android:id="@+id/locationTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:drawableStart="@drawable/ic_location"
-            android:ellipsize="start"
-            android:textColor="@color/lightBlue"
-            android:visibility="gone"
+            android:layout_height="match_parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/videoIv"
-            tools:text="1st street 10A" />
+            app:layout_constraintTop_toBottomOf="@id/postContentTV" />
 
         <TextView
-            android:id="@+id/likeCountTv"
+            android:id="@+id/postLikeCountTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
             android:drawableStart="@drawable/ic_favorite_inactive_24dp"
             android:drawablePadding="4dp"
-            app:layout_constraintEnd_toStartOf="@id/commentsCountTv"
-            app:layout_constraintTop_toBottomOf="@id/locationTv"
+            app:layout_constraintEnd_toStartOf="@id/postCommentsCountTv"
+            app:layout_constraintTop_toBottomOf="@id/sourceCard"
             tools:text="10" />
 
         <TextView
-            android:id="@+id/commentsCountTv"
+            android:id="@+id/postCommentsCountTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
             android:drawableStart="@drawable/ic_comment_inactive_24dp"
             android:drawablePadding="4dp"
-            app:layout_constraintEnd_toStartOf="@id/shareCountTv"
-            app:layout_constraintTop_toBottomOf="@id/locationTv"
+            app:layout_constraintEnd_toStartOf="@id/postShareCountTv"
+            app:layout_constraintTop_toBottomOf="@id/sourceCard"
             tools:text="1" />
 
         <TextView
-            android:id="@+id/shareCountTv"
+            android:id="@+id/postShareCountTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:drawableStart="@drawable/ic_share_inactive_24dp"
             android:drawablePadding="4dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/locationTv"
+            app:layout_constraintTop_toBottomOf="@id/sourceCard"
             tools:text="2" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
