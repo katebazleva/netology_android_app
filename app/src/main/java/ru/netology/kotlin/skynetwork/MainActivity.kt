@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.netology.kotlin.skynetwork.adapter.PostAdapter
-import ru.netology.kotlin.skynetwork.data.SimplePost
+import ru.netology.kotlin.skynetwork.data.Post
+import ru.netology.kotlin.skynetwork.data.PostType
+import ru.netology.kotlin.skynetwork.data.Video
+import ru.netology.kotlin.skynetwork.data.x
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -20,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         createdTime.set(2020, Calendar.JULY, 20, 9, 35, 0)
 
         val postsList = listOf(
-            SimplePost(
+            Post(
                 1,
                 "kate bazleva",
                 "Something very interesting",
@@ -30,23 +33,28 @@ class MainActivity : AppCompatActivity() {
                 likedByMe = true,
                 sharedByMe = true
             ),
-            SimplePost(
+            Post(
                 2,
                 "bzzzz",
                 "Bzz-zzzz",
                 createdTime.time,
-                likesCount = 10
+                likesCount = 10,
+                video = Video("https://www.youtube.com/watch?v=G-7U-FDql1A"),
+                postType = PostType.VIDEO_POST
             ),
-            SimplePost(
+            Post(
                 3,
                 "mikki",
                 "Third post!",
                 createdTime.time,
                 commentsCount = 3,
                 shareCount = 2,
-                commentedByMe = true
+                commentedByMe = true,
+                address = "Moscow State University",
+                location = 55.702893 x 37.530829,
+                postType = PostType.EVENT_POST
             ),
-            SimplePost(
+            Post(
                 4,
                 "mouse",
                 "QWERTYUIOP[ASDFGHJKL;zxcvbnm,dhfkjehrfvcljbdnvcli ubaeowhlvbkjfzds;oifeh;oigbvavubeb;vb zjk",
@@ -55,7 +63,7 @@ class MainActivity : AppCompatActivity() {
                 shareCount = 2,
                 likedByMe = true
             ),
-            SimplePost(
+            Post(
                 5,
                 "mur",
                 "meow :3",
@@ -64,7 +72,9 @@ class MainActivity : AppCompatActivity() {
                 commentsCount = 3,
                 shareCount = 2,
                 likedByMe = true,
-                sharedByMe = true
+                sharedByMe = true,
+                adsLink = "https://netology.ru/programs/kotlindevelopment/",
+                postType = PostType.ADVERTISING
             )
         )
 
@@ -73,7 +83,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun addData(postsList: List<SimplePost>) {
+    private fun addData(postsList: List<Post>) {
         postsAdapter.submitPosts(postsList)
     }
 

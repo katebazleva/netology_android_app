@@ -2,7 +2,7 @@ package ru.netology.kotlin.skynetwork.data
 
 import java.util.*
 
-data class VideoPost(
+class Post(
     val id: Int,
     val author: String,
     val content: String,
@@ -13,6 +13,11 @@ data class VideoPost(
     var likedByMe: Boolean = false,
     var commentedByMe: Boolean = false,
     var sharedByMe: Boolean = false,
-    val video: Video,
-    val postType: PostType = PostType.VIDEO_POST
-) : PostInterface
+    var address: String? = null,
+    var location: Location? = null,
+    val video: Video? = null,
+    val adsLink: String? = null,
+    val source: Post? = null,
+    val postType: PostType = PostType.SIMPLE_POST
+) {
+}
