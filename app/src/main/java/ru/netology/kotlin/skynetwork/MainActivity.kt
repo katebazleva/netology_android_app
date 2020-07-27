@@ -5,10 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.netology.kotlin.skynetwork.adapter.PostAdapter
-import ru.netology.kotlin.skynetwork.data.Post
-import ru.netology.kotlin.skynetwork.data.PostType
-import ru.netology.kotlin.skynetwork.data.Video
-import ru.netology.kotlin.skynetwork.data.x
+import ru.netology.kotlin.skynetwork.data.*
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -73,7 +70,10 @@ class MainActivity : AppCompatActivity() {
                 shareCount = 2,
                 likedByMe = true,
                 sharedByMe = true,
-                adsLink = "https://netology.ru/programs/kotlindevelopment/",
+                advertising = Advertising(
+                    "https://promokody-tmall.ru/wp-content/uploads/2020/03/netology-e1585655654780.png",
+                    "https://netology.ru/programs/kotlindevelopment/"
+                ),
                 postType = PostType.ADVERTISING
             )
         )

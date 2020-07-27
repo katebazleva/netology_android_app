@@ -16,7 +16,7 @@ class Post(
     var address: String? = null,
     var location: Location? = null,
     val video: Video? = null,
-    val adsLink: String? = null,
+    val advertising: Advertising? = null,
     val source: Post? = null,
     val postType: PostType = PostType.SIMPLE_POST
 ) {
