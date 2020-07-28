@@ -6,7 +6,7 @@ import android.view.View
 import kotlinx.android.synthetic.main.post_card.view.*
 import ru.netology.kotlin.skynetwork.data.Post
 
-class EventPostViewHolder(view: View) : BaseViewHolder(view) {
+class EventPostViewHolder(view: View, listener: (Int) -> Unit) : BaseViewHolder(view, listener) {
     override fun bind(post: Post) {
         super.bind(post)
 

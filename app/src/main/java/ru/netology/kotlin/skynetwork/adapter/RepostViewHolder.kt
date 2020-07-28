@@ -12,7 +12,7 @@ import ru.netology.kotlin.skynetwork.data.Post
 import java.text.SimpleDateFormat
 import java.util.*
 
-class RepostViewHolder(view: View) : BaseViewHolder(view) {
+class RepostViewHolder(view: View, listener: (Int) -> Unit) : BaseViewHolder(view, listener) {
     override fun bind(post: Post) {
         super.bind(post)
         val sourceCard = itemView.sourceCard

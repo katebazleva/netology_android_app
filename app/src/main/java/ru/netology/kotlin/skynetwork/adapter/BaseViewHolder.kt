@@ -10,7 +10,8 @@ import ru.netology.kotlin.skynetwork.data.Post
 import java.text.SimpleDateFormat
 import java.util.*
 
-abstract class BaseViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+abstract class BaseViewHolder(view: View, val listener: (Int) -> Unit) :
+    RecyclerView.ViewHolder(view) {
     open fun bind(post: Post) {
         val date = itemView.dateTv
         val author = itemView.authorTv
@@ -18,11 +19,17 @@ abstract class BaseViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val likesCount = itemView.likeCountTv
         val commentsCount = itemView.commentsCountTv
         val shareCount = itemView.shareCountTv
+        val closeBtn = itemView.closeBtn
 
         val simpleDate = SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault())
         date.text = simpleDate.format(post.created).toString()
         author.text = post.author
         content.text = post.content
+
+        closeBtn.setOnClickListener {
+            post.isHidden = true
+            listener(adapterPosition)
+        }
 
         likesCount.text = if (post.likesCount > 0) post.likesCount.toString() else null
         commentsCount.text = if (post.commentsCount > 0) post.commentsCount.toString() else null

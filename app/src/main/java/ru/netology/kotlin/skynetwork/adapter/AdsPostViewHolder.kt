@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.post_card.view.*
 import ru.netology.kotlin.skynetwork.R
 import ru.netology.kotlin.skynetwork.data.Post
 
-class AdsPostViewHolder(view: View) : BaseViewHolder(view) {
+class AdsPostViewHolder(view: View, listener: (Int) -> Unit) : BaseViewHolder(view, listener) {
     override fun bind(post: Post) {
         super.bind(post)
 

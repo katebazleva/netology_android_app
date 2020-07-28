@@ -101,7 +101,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun addData(postsList: List<Post>) {
-        postsAdapter.submitPosts(postsList)
+        postsAdapter.setData(postsList)
     }
 
     private fun initRecyclerView() {

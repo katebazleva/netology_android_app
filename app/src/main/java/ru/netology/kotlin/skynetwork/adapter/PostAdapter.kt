@@ -8,45 +8,15 @@ import ru.netology.kotlin.skynetwork.data.Post
 import ru.netology.kotlin.skynetwork.data.PostType
 
 class PostAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private var items: List<Post> = ArrayList()
+    private var items = mutableListOf<Post>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         when (viewType) {
-            ViewType.SIMPLE_POST -> SimplePostViewHolder(
-                LayoutInflater.from(parent.context).inflate(
-                    R.layout.post_card,
-                    parent,
-                    false
-                )
-            )
-            ViewType.EVENT_POST -> EventPostViewHolder(
-                LayoutInflater.from(parent.context).inflate(
-                    R.layout.post_card,
-                    parent,
-                    false
-                )
-            )
-            ViewType.VIDEO_POST -> VideoPostViewHolder(
-                LayoutInflater.from(parent.context).inflate(
-                    R.layout.post_card,
-                    parent,
-                    false
-                )
-            )
-            ViewType.ADVERTISING_POST -> AdsPostViewHolder(
-                LayoutInflater.from(parent.context).inflate(
-                    R.layout.post_card,
-                    parent,
-                    false
-                )
-            )
-            ViewType.REPOST -> RepostViewHolder(
-                LayoutInflater.from(parent.context).inflate(
-                    R.layout.post_card,
-                    parent,
-                    false
-                )
-            )
+            ViewType.SIMPLE_POST -> SimplePostViewHolder(inflateLayout(parent), ::onHideClick)
+            ViewType.EVENT_POST -> EventPostViewHolder(inflateLayout(parent), ::onHideClick)
+            ViewType.VIDEO_POST -> VideoPostViewHolder(inflateLayout(parent), ::onHideClick)
+            ViewType.ADVERTISING_POST -> AdsPostViewHolder(inflateLayout(parent), ::onHideClick)
+            ViewType.REPOST -> RepostViewHolder(inflateLayout(parent), ::onHideClick)
             else -> throw Exception("ViewHolder with type $viewType not exist")
         }
 
@@ -70,8 +40,8 @@ class PostAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         else -> ViewType.SIMPLE_POST
     }
 
-    fun submitPosts(postsList: List<Post>) {
-        items = postsList
+    fun setData(postsList: List<Post>) {
+        items.addAll(postsList)
     }
 
     private object ViewType {
@@ -80,5 +50,18 @@ class PostAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         const val VIDEO_POST = 2
         const val ADVERTISING_POST = 3
         const val REPOST = 4
+    }
+
+    private fun inflateLayout(parent: ViewGroup) = LayoutInflater.from(parent.context).inflate(
+        R.layout.post_card,
+        parent,
+        false
+    )
+
+    private fun onHideClick(index: Int) {
+        val newPostsList = items.filter { !it.isHidden }
+        items.clear()
+        items.addAll(newPostsList)
+        this.notifyDataSetChanged()
     }
 }

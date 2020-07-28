@@ -13,11 +13,12 @@ class Post(
     var likedByMe: Boolean = false,
     var commentedByMe: Boolean = false,
     var sharedByMe: Boolean = false,
-    var address: String? = null,
-    var location: Location? = null,
+    val address: String? = null,
+    val location: Location? = null,
     val video: Video? = null,
     val advertising: Advertising? = null,
     val source: Post? = null,
-    val postType: PostType = PostType.SIMPLE_POST
+    val postType: PostType = PostType.SIMPLE_POST,
+    var isHidden: Boolean = false
 ) {
 }

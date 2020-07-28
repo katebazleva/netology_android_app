@@ -11,7 +11,7 @@ import ru.netology.kotlin.skynetwork.data.Post
 
 const val VIDEO_PREVIEW_STUB_URL = "https://victor-mochere.com/wp-content/uploads/2019/08/How-to-download-a-video-on-YouTube.jpg"
 
-class VideoPostViewHolder(view: View) : BaseViewHolder(view) {
+class VideoPostViewHolder(view: View, listener: (Int) -> Unit) : BaseViewHolder(view, listener) {
     override fun bind(post: Post) {
         super.bind(post)
 
