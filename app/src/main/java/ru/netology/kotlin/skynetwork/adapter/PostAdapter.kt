@@ -42,7 +42,7 @@ class PostAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             )
             ViewType.REPOST -> RepostViewHolder(
                 LayoutInflater.from(parent.context).inflate(
-                    R.layout.repost_card,
+                    R.layout.post_card,
                     parent,
                     false
                 )

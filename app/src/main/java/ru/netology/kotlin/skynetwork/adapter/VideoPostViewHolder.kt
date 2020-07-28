@@ -9,6 +9,8 @@ import kotlinx.android.synthetic.main.post_card.view.*
 import ru.netology.kotlin.skynetwork.R
 import ru.netology.kotlin.skynetwork.data.Post
 
+const val VIDEO_PREVIEW_STUB_URL = "https://victor-mochere.com/wp-content/uploads/2019/08/How-to-download-a-video-on-YouTube.jpg"
+
 class VideoPostViewHolder(view: View) : BaseViewHolder(view) {
     override fun bind(post: Post) {
         super.bind(post)
@@ -21,7 +23,7 @@ class VideoPostViewHolder(view: View) : BaseViewHolder(view) {
 
         Glide.with(itemView.context)
             .applyDefaultRequestOptions(requestOptions)
-            .load("https://victor-mochere.com/wp-content/uploads/2019/08/How-to-download-a-video-on-YouTube.jpg")
+            .load(VIDEO_PREVIEW_STUB_URL)
             .fitCenter()
             .into(video)
 
