@@ -7,10 +7,10 @@ import ru.netology.kotlin.skynetwork.R
 import ru.netology.kotlin.skynetwork.data.Post
 import ru.netology.kotlin.skynetwork.data.PostType
 
-class PostAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class PostAdapter : RecyclerView.Adapter<BaseViewHolder>() {
     private var items = mutableListOf<Post>()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder =
         when (viewType) {
             ViewType.SIMPLE_POST -> SimplePostViewHolder(inflateLayout(parent), ::onHideClick)
             ViewType.EVENT_POST -> EventPostViewHolder(inflateLayout(parent), ::onHideClick)
@@ -22,7 +22,7 @@ class PostAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemCount(): Int = items.size
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         when (holder) {
             is SimplePostViewHolder -> holder.bind(items[position])
             is EventPostViewHolder -> holder.bind(items[position])
@@ -42,6 +42,7 @@ class PostAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     fun setData(postsList: List<Post>) {
         items.addAll(postsList)
+        this.notifyDataSetChanged()
     }
 
     private object ViewType {
