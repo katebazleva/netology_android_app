@@ -41,6 +41,7 @@ class PostAdapter : RecyclerView.Adapter<BaseViewHolder>() {
     }
 
     fun setData(postsList: List<Post>) {
+        items.clear()
         items.addAll(postsList)
         this.notifyDataSetChanged()
     }
@@ -61,8 +62,6 @@ class PostAdapter : RecyclerView.Adapter<BaseViewHolder>() {
 
     private fun onHideClick(index: Int) {
         val newPostsList = items.filter { !it.isHidden }
-        items.clear()
-        items.addAll(newPostsList)
-        this.notifyDataSetChanged()
+        setData(newPostsList)
     }
 }
