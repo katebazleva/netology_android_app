@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/sourceAvatarIv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_android"
+            tools:srcCompat="@drawable/ic_android" />
+
+        <TextView
+            android:id="@+id/sourceDateTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8sp"
+            android:textSize="10sp"
+            app:layout_constraintStart_toEndOf="@id/sourceAvatarIv"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="12 august 2020" />
+
+        <TextView
+            android:id="@+id/sourceAuthorTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8sp"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@id/sourceAvatarIv"
+            app:layout_constraintTop_toBottomOf="@id/sourceDateTv"
+            tools:text="Kate" />
+
+        <TextView
+            android:id="@+id/sourceAdsTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"
+            android:textSize="10sp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="Рекламный пост"
+            tools:text="Рекламный пост"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/sourceContentTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sourceAvatarIv"
+            tools:text="Some content" />
+
+        <ImageView
+            android:id="@+id/sourcePictureIv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@color/lightBlue"
+            android:scaleType="centerCrop"
+            android:paddingTop="24dp"
+            android:paddingBottom="24dp"
+            android:src="@drawable/ic_play_circle_outline"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/sourceContentTV"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

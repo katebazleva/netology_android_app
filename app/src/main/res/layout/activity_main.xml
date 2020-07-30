@@ -1,124 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#eeeeee"
     tools:context=".MainActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#ffffff"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:padding="16dp"
-        android:layout_margin="16dp">
-
-        <ImageView
-            android:id="@+id/avatarIv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_android"
-            tools:srcCompat="@drawable/ic_android"/>
-
-        <TextView
-            android:id="@+id/dateTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="12 august 2020"
-            android:textSize="10sp"
-            android:layout_marginStart="8sp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/avatarIv"/>
-
-        <TextView
-            android:id="@+id/authorTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Kate"
-            android:textColor="@color/black"
-            android:layout_marginStart="8sp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@id/dateTv"
-            app:layout_constraintStart_toEndOf="@id/avatarIv"/>
-
-        <TextView
-            android:id="@+id/contentTV"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/avatarIv"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="8dp"
-            android:textSize="18sp"
-            tools:text="Some content"/>
-
-        <ImageView
-            android:id="@+id/videoIv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_play_circle_outline"
-            android:background="@color/lightBlue"
-            app:layout_constraintTop_toBottomOf="@id/contentTV"
-            android:paddingTop="24dp"
-            android:paddingBottom="24dp"
-            android:layout_marginTop="8dp"
-            android:visibility="gone"/>
-
-        <TextView
-            android:id="@+id/locationTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:drawableStart="@drawable/ic_location"
-            android:ellipsize="start"
-            android:textColor="@color/lightBlue"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/videoIv"
-            tools:text="1st street 10A"
-            android:visibility="gone"/>
-
-        <TextView
-            android:id="@+id/likeCountTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="32dp"
-            android:drawableStart="@drawable/ic_favorite_inactive_24dp"
-            android:drawablePadding="4dp"
-            app:layout_constraintEnd_toStartOf="@id/commentsCountTv"
-            app:layout_constraintTop_toBottomOf="@id/locationTv"
-            tools:text="10" />
-
-        <TextView
-            android:id="@+id/commentsCountTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/locationTv"
-            android:drawableStart="@drawable/ic_comment_inactive_24dp"
-            app:layout_constraintEnd_toStartOf="@id/shareCountTv"
-            android:drawablePadding="4dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginTop="16dp"
-            tools:text="1"/>
-
-        <TextView
-            android:id="@+id/shareCountTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/locationTv"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:drawableStart="@drawable/ic_share_inactive_24dp"
-            android:drawablePadding="4dp"
-            android:layout_marginTop="16dp"
-            tools:text="2"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="match_parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
