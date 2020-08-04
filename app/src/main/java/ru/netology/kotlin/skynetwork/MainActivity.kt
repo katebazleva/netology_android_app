@@ -1,6 +1,7 @@
 package ru.netology.kotlin.skynetwork
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.ktor.client.HttpClient
@@ -12,6 +13,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import ru.netology.kotlin.skynetwork.adapter.PostAdapter
@@ -20,7 +22,7 @@ import ru.netology.kotlin.skynetwork.data.Post
 class MainActivity : AppCompatActivity() {
 
     private val POSTS_URL =
-        "https://raw.githubusercontent.com/katebazleva/netology_backend/master/test.json"
+        "https://raw.githubusercontent.com/katebazleva/netology_backend/master/posts.json"
 
     private lateinit var postsAdapter: PostAdapter
 
@@ -29,7 +31,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         CoroutineScope(IO).launch {
+            delay(3000)
             val postsList = getPostsFromInternet()
+
             withContext(Main) {
                 initRecyclerView()
                 addData(postsList)
@@ -48,6 +52,8 @@ class MainActivity : AppCompatActivity() {
             postsAdapter = PostAdapter()
             adapter = postsAdapter
         }
+        recycler_view.visibility = View.VISIBLE
+        progress_bar.visibility = View.GONE
     }
 
     private suspend fun getPostsFromInternet(url: String = POSTS_URL): List<Post> {
