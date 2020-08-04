@@ -7,8 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.post_card.view.*
 import ru.netology.kotlin.skynetwork.R
 import ru.netology.kotlin.skynetwork.data.Post
-import java.text.SimpleDateFormat
-import java.util.*
 
 abstract class BaseViewHolder(view: View, val listener: (Int) -> Unit) :
     RecyclerView.ViewHolder(view) {
@@ -21,8 +19,7 @@ abstract class BaseViewHolder(view: View, val listener: (Int) -> Unit) :
         val shareCount = itemView.shareCountTv
         val closeBtn = itemView.closeBtn
 
-        val simpleDate = SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault())
-        date.text = simpleDate.format(post.created).toString()
+        date.text = post.created
         author.text = post.author
         content.text = post.content
 

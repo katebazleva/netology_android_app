@@ -9,8 +9,6 @@ import kotlinx.android.synthetic.main.post_card.view.*
 import kotlinx.android.synthetic.main.repost_original_card.view.*
 import ru.netology.kotlin.skynetwork.R
 import ru.netology.kotlin.skynetwork.data.Post
-import java.text.SimpleDateFormat
-import java.util.*
 
 class RepostViewHolder(view: View, listener: (Int) -> Unit) : BaseViewHolder(view, listener) {
     override fun bind(post: Post) {
@@ -20,8 +18,7 @@ class RepostViewHolder(view: View, listener: (Int) -> Unit) : BaseViewHolder(vie
 
         post.source?.let {
             with(sourceCard) {
-                val sourceSimpleDate = SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault())
-                sourceDateTv.text = sourceSimpleDate.format(it.created).toString()
+                sourceDateTv.text = it.created
                 sourceAuthorTv.text = it.author
                 sourceContentTV.text = it.content
 
