@@ -23,6 +23,8 @@ class MainActivity : AppCompatActivity() {
 
     private val POSTS_URL =
         "https://raw.githubusercontent.com/katebazleva/netology_backend/master/posts.json"
+    private val ADS_POSTS_URL =
+        "https://raw.githubusercontent.com/katebazleva/netology_backend/master/adsPosts.json"
 
     private lateinit var postsAdapter: PostAdapter
 
@@ -32,17 +34,18 @@ class MainActivity : AppCompatActivity() {
 
         CoroutineScope(IO).launch {
             delay(3000)
-            val postsList = getPostsFromInternet()
+            val postsList = getPostsFromInternet(POSTS_URL)
+            val adsPostsList  = getPostsFromInternet(ADS_POSTS_URL)
 
             withContext(Main) {
                 initRecyclerView()
-                addData(postsList)
+                addData(postsList, adsPostsList)
             }
         }
     }
 
-    private fun addData(postsList: List<Post>) {
-        postsAdapter.setData(postsList)
+    private fun addData(postsList: List<Post>, adsPostsList: List<Post>) {
+        postsAdapter.setData(postsList, adsPostsList)
     }
 
     private fun initRecyclerView() {
@@ -56,7 +59,7 @@ class MainActivity : AppCompatActivity() {
         progress_bar.visibility = View.GONE
     }
 
-    private suspend fun getPostsFromInternet(url: String = POSTS_URL): List<Post> {
+    private suspend fun getPostsFromInternet(url: String): List<Post> {
         val client = HttpClient {
             install(JsonFeature) {
                 acceptContentTypes = listOf(
