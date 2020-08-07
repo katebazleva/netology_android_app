@@ -3,6 +3,7 @@ package ru.netology.kotlin.skynetwork.adapter
 import android.content.Intent
 import android.net.Uri
 import android.view.View
+import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.post_card.view.*
@@ -14,7 +15,7 @@ class RepostViewHolder(view: View, listener: (Int) -> Unit) : BaseViewHolder(vie
     override fun bind(post: Post) {
         super.bind(post)
         val sourceCard = itemView.sourceCard
-        sourceCard.visibility = View.VISIBLE
+        sourceCard.isVisible = true
 
         post.source?.let {
             with(sourceCard) {
@@ -23,12 +24,12 @@ class RepostViewHolder(view: View, listener: (Int) -> Unit) : BaseViewHolder(vie
                 sourceContentTV.text = it.content
 
                 it.advertising?.let {
-                    sourceAdsTv.visibility = View.VISIBLE
+                    sourceAdsTv.isVisible = true
                     setOriginalPostPicture(this, it.adsUrl, it.imageUrl)
                 }
 
                 it.video?.let {
-                    sourcePictureIv.visibility = View.VISIBLE
+                    sourcePictureIv.isVisible = true
                     setOriginalPostPicture(this, it.url)
                 }
             }
@@ -41,7 +42,7 @@ class RepostViewHolder(view: View, listener: (Int) -> Unit) : BaseViewHolder(vie
         imageUrl: String = VIDEO_PREVIEW_STUB_URL
     ) {
         val pictureView = sourceCard.sourcePictureIv
-        pictureView.visibility = View.VISIBLE
+        pictureView.isVisible = true
         val requestOptions = RequestOptions()
             .placeholder(R.drawable.ic_launcher_background)
             .error(R.drawable.ic_launcher_background)
@@ -52,7 +53,7 @@ class RepostViewHolder(view: View, listener: (Int) -> Unit) : BaseViewHolder(vie
             .fitCenter()
             .into(pictureView)
 
-        pictureView.visibility = View.VISIBLE
+        pictureView.isVisible = true
         pictureView.setOnClickListener {
             val intent = Intent().apply {
                 action = Intent.ACTION_VIEW

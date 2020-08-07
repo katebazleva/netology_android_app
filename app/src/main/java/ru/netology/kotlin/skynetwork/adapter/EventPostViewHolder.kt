@@ -3,6 +3,7 @@ package ru.netology.kotlin.skynetwork.adapter
 import android.content.Intent
 import android.net.Uri
 import android.view.View
+import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.post_card.view.*
 import ru.netology.kotlin.skynetwork.data.Post
 
@@ -12,7 +13,7 @@ class EventPostViewHolder(view: View, listener: (Int) -> Unit) : BaseViewHolder(
 
         val address = itemView.locationTv
 
-        address.visibility = View.VISIBLE
+        address.isVisible = true
         address.text = post.address
         address.setOnClickListener {
             val intent = Intent().apply {
