@@ -3,6 +3,7 @@ package ru.netology.kotlin.skynetwork.adapter
 import android.content.Intent
 import android.net.Uri
 import android.view.View
+import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.post_card.view.*
@@ -27,7 +28,7 @@ class VideoPostViewHolder(view: View, listener: (Int) -> Unit) : BaseViewHolder(
             .fitCenter()
             .into(video)
 
-        video.visibility = View.VISIBLE
+        video.isVisible = true
         video.setOnClickListener {
             val intent = Intent().apply {
                 action = Intent.ACTION_VIEW

@@ -2,114 +2,77 @@ package ru.netology.kotlin.skynetwork
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import io.ktor.client.HttpClient
+import io.ktor.client.features.json.GsonSerializer
+import io.ktor.client.features.json.JsonFeature
+import io.ktor.client.request.get
+import io.ktor.http.ContentType
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.launch
 import ru.netology.kotlin.skynetwork.adapter.PostAdapter
-import ru.netology.kotlin.skynetwork.data.*
-import java.util.*
+import ru.netology.kotlin.skynetwork.data.Post
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var postsAdapter: PostAdapter
+    companion object {
+        private const val POSTS_URL =
+            "https://raw.githubusercontent.com/katebazleva/netology_backend/master/posts.json"
+        private const val ADS_POSTS_URL =
+            "https://raw.githubusercontent.com/katebazleva/netology_backend/master/adsPosts.json"
+    }
+
+    private val postsAdapter: PostAdapter = PostAdapter()
+    private val client by lazy(LazyThreadSafetyMode.NONE) { getHttpClient() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val createdTime = Calendar.getInstance()
-        createdTime.set(2020, Calendar.JULY, 20, 9, 35, 0)
+        lifecycleScope.launch {
+            val postsList = client.getPostsFromInternet(POSTS_URL)
+            val adsPostsList = client.getPostsFromInternet(ADS_POSTS_URL)
 
-        val postsList = mutableListOf(
-            Post(
-                1,
-                "kate bazleva",
-                "Something very interesting",
-                createdTime.time,
-                likesCount = 1,
-                shareCount = 2,
-                likedByMe = true,
-                sharedByMe = true
-            ),
-            Post(
-                2,
-                "bzzzz",
-                "Bzz-zzzz",
-                createdTime.time,
-                likesCount = 10,
-                video = Video("https://www.youtube.com/watch?v=G-7U-FDql1A"),
-                postType = PostType.VIDEO_POST
-            ),
-            Post(
-                3,
-                "mikki",
-                "Third post!",
-                createdTime.time,
-                commentsCount = 3,
-                shareCount = 2,
-                commentedByMe = true,
-                address = "Moscow State University",
-                location = 55.702893 x 37.530829,
-                postType = PostType.EVENT_POST
-            ),
-            Post(
-                4,
-                "mouse",
-                "QWERTYUIOP[ASDFGHJKL;zxcvbnm,dhfkjehrfvcljbdnvcli ubaeowhlvbkjfzds;oifeh;oigbvavubeb;vb zjk",
-                createdTime.time,
-                likesCount = 5,
-                shareCount = 2,
-                likedByMe = true
-            ),
-            Post(
-                5,
-                "mur",
-                "meow :3",
-                createdTime.time,
-                likesCount = 100,
-                commentsCount = 3,
-                shareCount = 2,
-                likedByMe = true,
-                sharedByMe = true,
-                advertising = Advertising(
-                    "https://promokody-tmall.ru/wp-content/uploads/2020/03/netology-e1585655654780.png",
-                    "https://netology.ru/programs/kotlindevelopment/"
-                ),
-                postType = PostType.ADVERTISING
-            )
-        )
-
-        createdTime.set(2020, Calendar.JULY, 31, 15, 1, 0)
-        postsList.add(
-            Post(
-                6,
-                "mur-mur-mur",
-                "meow!!!",
-                createdTime.time,
-                likesCount = 2,
-                commentsCount = 0,
-                shareCount = 0,
-                likedByMe = true,
-                sharedByMe = true,
-                source = postsList[4],
-                postType = PostType.REPOST
-            )
-        )
-
-        initRecyclerView()
-        addData(postsList)
-
+            initRecyclerView()
+            addData(postsList, adsPostsList)
+        }
     }
 
-    private fun addData(postsList: List<Post>) {
-        postsAdapter.setData(postsList)
+    private fun addData(postsList: List<Post>, adsPostsList: List<Post>) {
+        postsAdapter.setData(postsList, adsPostsList)
     }
 
     private fun initRecyclerView() {
         recycler_view.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
             addItemDecoration(ItemDecoration(45))
-            postsAdapter = PostAdapter()
             adapter = postsAdapter
         }
+        recycler_view.isVisible = true
+        progress_bar.isVisible = false
+    }
+
+    private suspend fun HttpClient.getPostsFromInternet(url: String): List<Post> {
+        val response = this.get<List<Post>>(url)
+        println(response)
+
+        return response
+    }
+
+    private fun getHttpClient() = HttpClient {
+        install(JsonFeature) {
+            accept(
+                ContentType.Text.Plain,
+                ContentType.Application.Json
+            )
+            serializer = GsonSerializer()
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        client.close()
     }
 }

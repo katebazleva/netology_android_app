@@ -40,10 +40,27 @@ class PostAdapter : RecyclerView.Adapter<BaseViewHolder>() {
         else -> ViewType.SIMPLE_POST
     }
 
-    fun setData(postsList: List<Post>) {
+    fun setData(postsList: List<Post>, adsPostsList: List<Post>) {
+        val postsListWithAds = mixUserAndAdsPosts(postsList, adsPostsList)
         items.clear()
-        items.addAll(postsList)
+        items.addAll(postsListWithAds)
         this.notifyDataSetChanged()
+    }
+
+    private fun mixUserAndAdsPosts(postsList: List<Post>, adsPostsList: List<Post>): List<Post> {
+        val postsWithAdsList = postsList.toMutableList()
+
+        val step = 2
+        var adsIterator = 0
+        var i = step
+        while (i < postsWithAdsList.size && adsIterator < adsPostsList.size) {
+            postsWithAdsList.add(i, adsPostsList[adsIterator])
+            adsIterator++
+            i++
+            i += step
+        }
+
+        return postsWithAdsList
     }
 
     private object ViewType {
@@ -61,7 +78,8 @@ class PostAdapter : RecyclerView.Adapter<BaseViewHolder>() {
     )
 
     private fun onHideClick(index: Int) {
-        val newPostsList = items.filter { !it.isHidden }
-        setData(newPostsList)
+        val newPostsList = items.filter { !it.isHidden && it.postType != PostType.ADVERTISING }
+        val newAdsPostsList = items.filter { !it.isHidden && it.postType == PostType.ADVERTISING }
+        setData(newPostsList, newAdsPostsList)
     }
 }

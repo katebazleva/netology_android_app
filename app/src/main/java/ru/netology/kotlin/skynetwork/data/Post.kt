@@ -1,12 +1,10 @@
 package ru.netology.kotlin.skynetwork.data
 
-import java.util.*
-
 class Post(
     val id: Int,
     val author: String,
     val content: String,
-    val created: Date,
+    val created: String,
     var likesCount: Int = 0,
     var commentsCount: Int = 0,
     var shareCount: Int = 0,
